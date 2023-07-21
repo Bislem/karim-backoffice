@@ -8,8 +8,9 @@ export class AppService {
 
   readonly defaultAction = '';
   readonly defaultSnackbarConfig: MatSnackBarConfig = {
-    horizontalPosition: 'end',
+    horizontalPosition: 'center',
     verticalPosition: 'top',
+    duration: 1200,
   }
 
   constructor(
@@ -22,7 +23,7 @@ export class AppService {
       undefined,
       {
         ...this.defaultSnackbarConfig,
-        panelClass: ['bg-red-500'],
+        panelClass: ['bg-red-400'],
       }
     )
   }

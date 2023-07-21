@@ -15,9 +15,9 @@
           <form class="m-t-30" [formGroup]="form" (ngSubmit)="submit()">
             <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Email</mat-label>
             <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput formControlName="uname" />
-              <mat-hint *ngIf="f['uname'].touched && f['uname'].invalid" class="m-b-16 error-msg">
-                <div class="text-error" *ngIf="f['uname'].errors && f['uname'].errors['required']">
+              <input matInput formControlName="email" />
+              <mat-hint *ngIf="f['email'].touched && f['email'].invalid" class="m-b-16 error-msg">
+                <div class="text-error" *ngIf="f['email'].errors && f['email'].errors['required']">
                   Email requis.
                 </div>
               </mat-hint>
@@ -40,8 +40,9 @@
               <a [routerLink]="['/authentication/boxed-forgot-pwd']"
                 class="text-primary f-w-600 text-decoration-none m-x-auto f-s-13">Mot de passe oublié ?</a>
             </div>
-            <button mat-flat-button color="primary" class="w-100" [disabled]="form.invalid">
-              Connexion
+            <button mat-flat-button color="primary" class="w-100" [disabled]="form.invalid || isLoading">
+              <mat-spinner [color]="'white'" *ngIf="isLoading" [diameter]="25"></mat-spinner>
+              <span *ngIf="!isLoading">Connexion</span>
             </button>
             <!-- input -->
           </form>
