@@ -15,8 +15,8 @@ import * as TablerIcons from 'angular-tabler-icons/icons';
 import { AuthenticationRoutes } from './authentication.routing';
 
 import { AppErrorComponent } from './error/error.component';
-import { AppSideLoginComponent } from './side-login/side-login.component';
-import { AppSideRegisterComponent } from './side-register/side-register.component';
+import { AppLoginComponent } from './login/login.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   imports: [
@@ -31,8 +31,8 @@ import { AppSideRegisterComponent } from './side-register/side-register.componen
     ReactiveFormsModule,
     TablerIconsModule.pick(TablerIcons),
     AppErrorComponent,
-    AppSideLoginComponent,
-    AppSideRegisterComponent,
+    AppLoginComponent,
+    MatSnackBarModule
   ],
 })
 export class AuthenticationModule {}

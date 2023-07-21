@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "school-001-fe090"
+  },
+  "targets": {
+    "school-001-fe090": {
+      "hosting": {
+        "Modernize": [
+          "school-001-fe090"
+        ]
+      }
+    }
+  }
+}

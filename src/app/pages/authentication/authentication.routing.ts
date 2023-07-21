@@ -1,8 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { AppErrorComponent } from './error/error.component';
-import { AppSideLoginComponent } from './side-login/side-login.component';
-import { AppSideRegisterComponent } from './side-register/side-register.component';
+import { AppLoginComponent } from './login/login.component';
 
 export const AuthenticationRoutes: Routes = [
   {
@@ -15,11 +14,7 @@ export const AuthenticationRoutes: Routes = [
 
       {
         path: 'side-login',
-        component: AppSideLoginComponent,
-      },
-      {
-        path: 'side-register',
-        component: AppSideRegisterComponent,
+        component: AppLoginComponent,
       },
     ],
   },

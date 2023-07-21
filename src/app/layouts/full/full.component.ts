@@ -155,17 +155,17 @@ export class FullComponent implements OnInit {
     {
       id: 2,
       title: 'Authentication Design',
-      link: '/authentication/side-login',
+      link: '/auth/side-login',
     },
     {
       id: 3,
       title: 'Register Now',
-      link: '/authentication/side-register',
+      link: '/auth/side-register',
     },
     {
       id: 4,
       title: '404 Error Page',
-      link: '/authentication/error',
+      link: '/auth/error',
     },
     {
       id: 5,

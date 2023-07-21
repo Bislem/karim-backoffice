@@ -1,0 +1,2 @@
+export const USERS_COLLECTION_NAME = "USERS";
+export const PRODUCTS_COLLECTION_NAME = "PRODUCTS";
