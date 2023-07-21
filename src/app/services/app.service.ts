@@ -9,21 +9,53 @@ export class AppService {
   readonly defaultAction = '';
   readonly defaultSnackbarConfig: MatSnackBarConfig = {
     horizontalPosition: 'end',
-    verticalPosition: 'top'
+    verticalPosition: 'top',
   }
 
   constructor(
     private snackbar: MatSnackBar,
   ) { }
 
-  showError(msg: string){
+  showError(msg: string) {
     this.snackbar.open(
       msg,
       undefined,
       {
         ...this.defaultSnackbarConfig,
-        panelClass: ['']
+        panelClass: ['bg-red-500'],
+      }
+    )
+  }
 
+  showSuccess(msg: string) {
+    this.snackbar.open(
+      msg,
+      undefined,
+      {
+        ...this.defaultSnackbarConfig,
+        panelClass: ['bg-green-500'],
+      }
+    )
+  }
+
+  showWarning(msg: string) {
+    this.snackbar.open(
+      msg,
+      undefined,
+      {
+        ...this.defaultSnackbarConfig,
+        panelClass: ['bg-orange-500'],
+      }
+    )
+  }
+
+  showInfo(msg: string) {
+    this.snackbar.open(
+      msg,
+      undefined,
+      {
+        ...this.defaultSnackbarConfig,
+        panelClass: ['bg-blue-500'],
       }
     )
   }

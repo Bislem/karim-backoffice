@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,8 @@ export class AppLoginComponent {
     private settings: CoreService,
     private router: Router,
     private authService: AuthService,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private appService: AppService
   ) { }
 
   form = new UntypedFormGroup({
@@ -37,12 +39,13 @@ export class AppLoginComponent {
   }
 
   submit() {
-    if (this.form.invalid) {
-      this.snackbar.open('Please fill the form', undefined, {
-        horizontalPosition: 'end',
-        verticalPosition: 'bottom',
-      });
-    }
-    this.router.navigate(['/home']);
+    this.appService.showSuccess('ERROR ??? ');
+    // if (this.form.invalid) {
+    //   this.snackbar.open('Please fill the form', undefined, {
+    //     horizontalPosition: 'end',
+    //     verticalPosition: 'bottom',
+    //   });
+    // }
+    // this.router.navigate(['/home']);
   }
 }
