@@ -7,5 +7,6 @@ export const environment = {
     apiKey: 'AIzaSyCv3xy-1QVqZNFGJtn-MRHFj16KwP2lrvc',
     authDomain: 'school-001-fe090.firebaseapp.com',
     messagingSenderId: '1013371084732',
-  }
+  },
+  API_BASE_URL: "http://localhost:8000/api"
 };
