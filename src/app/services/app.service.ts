@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { ConfirmationDialogComponent } from '../common/components/confirmation-dialog/confirmation-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +17,7 @@ export class AppService {
 
   constructor(
     private snackbar: MatSnackBar,
+    private dialog: MatDialog
   ) { }
 
   showError(msg: string) {
@@ -59,5 +62,19 @@ export class AppService {
         panelClass: ['bg-blue-500'],
       }
     )
+  }
+
+  openConfirmationDialog(title: string, description?: string) {
+    return new Promise<boolean>((resolve) => {
+      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+        data: {
+          title,
+          description
+        }
+      });
+      dialogRef.afterClosed().subscribe(res => {
+        resolve(res);
+      });
+    })
   }
 }

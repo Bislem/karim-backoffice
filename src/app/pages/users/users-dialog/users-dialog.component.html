@@ -1,0 +1,66 @@
+<h2 mat-dialog-title>{{title}}</h2>
+<mat-dialog-content class="mat-typography">
+  <form class="row" [formGroup]="userForm">
+    <div class="col-lg-6">
+      <!-- input -->
+      <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Prénom</mat-label>
+      <mat-form-field appearance="outline" class="w-100">
+        <input formControlName="firstName" type="text" matInput placeholder="Prénom" />
+        <mat-icon matPrefix>
+          <i-tabler name="user" class="icon-20 d-flex"></i-tabler>
+        </mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div class="col-lg-6">
+      <!-- input -->
+      <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Nom</mat-label>
+      <mat-form-field appearance="outline" class="w-100">
+        <input formControlName="lastName" type="text" matInput placeholder="Nom" />
+        <mat-icon matPrefix>
+          <i-tabler name="user" class="icon-20 d-flex"></i-tabler>
+        </mat-icon>
+      </mat-form-field>
+    </div>
+
+
+    <div class="col">
+      <!-- input -->
+      <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Email</mat-label>
+      <mat-form-field appearance="outline" class="w-100">
+        <input formControlName="email" type="email" matInput placeholder="Email" />
+        <mat-icon matPrefix>
+          <i-tabler name="mail" class="icon-20 d-flex"></i-tabler>
+        </mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div class="col">
+      <!-- input -->
+      <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Role</mat-label>
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-select formControlName="role" value="student" placeholder="Role de l'utilisateur">
+          <mat-option value="admin">Admin</mat-option>
+          <mat-option value="teacher">Ensignant</mat-option>
+          <mat-option value="student">éléve</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="col" *ngIf="mode === 'create'">
+      <!-- input -->
+      <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Mot de passe</mat-label>
+      <mat-form-field appearance="outline" class="w-100">
+        <input formControlName="password" matInput placeholder="Mot de passe" type="password" />
+        <mat-icon matPrefix>
+          <i-tabler name="lock" class="icon-20 d-flex"></i-tabler>
+        </mat-icon>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close>Annuler</button>
+  <button mat-raised-button color="primary" (click)="submit()" cdkFocusInitial>{{mode === 'create' ? 'Créer' :
+    'Modifier'}}</button>
+</mat-dialog-actions>

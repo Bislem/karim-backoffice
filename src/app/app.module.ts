@@ -24,14 +24,11 @@ import { FilterPipe } from './pipe/filter.pipe';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { environment } from '../environments/environment';
-import { provideAuth, getAuth } from '@angular/fire/auth';
-import { provideFirestore, getFirestore } from '@angular/fire/firestore';
-import { provideFunctions, getFunctions } from '@angular/fire/functions';
-import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { ComponentsModule } from './common/components/components.module';
 import { AuthInterceptor } from './common/auth/auth.interceptor';
+import { DatePipe } from '@angular/common';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -47,6 +44,7 @@ export function HttpLoaderFactory(http: HttpClient): any {
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    MatNativeDateModule,
     TablerIconsModule.pick(TablerIcons),
     NgScrollbarModule,
     ComponentsModule,
@@ -59,10 +57,6 @@ export function HttpLoaderFactory(http: HttpClient): any {
     }),
 
     FullComponent,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore()),
-    provideFunctions(() => getFunctions()),
   ],
   exports: [TablerIconsModule],
   bootstrap: [AppComponent],
@@ -71,7 +65,9 @@ export function HttpLoaderFactory(http: HttpClient): any {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
-    }
+    },
+    DatePipe,
+    MatDatepickerModule
   ]
 })
 export class AppModule { }

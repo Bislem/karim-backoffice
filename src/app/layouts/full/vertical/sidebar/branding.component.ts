@@ -10,7 +10,7 @@ import { CoreService } from 'src/app/services/core.service';
     <div class="branding">
       <a href="/" *ngIf="options.theme === 'light'">
         <img
-          src="./assets/images/logos/dark-logo.svg"
+          src="./assets/images/logo.png"
           class="align-middle m-2"
           alt="logo"
         />

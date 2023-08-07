@@ -6,7 +6,7 @@ export const PagesRoutes: Routes = [
     path: '',
     component: StarterComponent,
     data: {
-      title: 'Starter Page',
+      title: 'Products page',
     },
   },
 ];

@@ -8,14 +8,14 @@ export const AuthenticationRoutes: Routes = [
     path: '',
     children: [
       {
+        path: 'login',
+        component: AppLoginComponent,
+      },
+      {
         path: 'error',
         component: AppErrorComponent,
       },
 
-      {
-        path: 'side-login',
-        component: AppLoginComponent,
-      },
     ],
   },
 ];

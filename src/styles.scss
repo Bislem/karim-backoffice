@@ -10,3 +10,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mdc-snackbar__surface{
     background: transparent !important;//to show the panel color
 }
+
+.mat-mdc-form-field-icon-prefix,.mat-mdc-form-field-icon-suffix{
+    margin: 0 10px;
+}
