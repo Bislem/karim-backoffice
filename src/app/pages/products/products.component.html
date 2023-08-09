@@ -1,0 +1,69 @@
+<mat-card class="cardWithShadow">
+  <mat-card-content class="p-24">
+    <div class="row justify-content-between">
+      <div class="col-lg-4">
+        <mat-form-field appearance="outline" class="w-100 hide-hint">
+          <input matInput placeholder="Chercher un produit" (keyup)="applyFilter($any($event.target).value)" />
+          <mat-icon matSuffix>
+            <i-tabler name="search" class="icon-20"></i-tabler>
+          </mat-icon>
+        </mat-form-field>
+      </div>
+      <div class="col-lg-4 d-flex align-items-center justify-content-end">
+        <button mat-fab color="primary" (click)="openDialog('create', null)" color="primary">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<!-- <mat-card class="cardWithShadow"> -->
+<!-- <mat-card-content class="p-24"> -->
+
+<div class="row">
+  <div class="col-sm-6 col-lg-3" *ngFor="let productcard of products">
+    <mat-card class="cardWithShadow productcard overflow-hidden">
+      <div class="group">
+        <img src="{{productcard.images && productcard.images.length > 0 ? getPoster(productcard.images) : '/assets/images/image.png'}}" alt="imgSrc" class="w-100"
+          mat-card-image />
+        <span class="myRef m-l-auto transition-all ease-in-out opacity-0 group-hover:opacity-100 absolute top-5 left-5"
+          matTooltip="Ref">
+          <span class="bg-primary text-white p-x-8 p-y-4 f-w-500 rounded f-s-17">{{productcard.ref}}</span>
+        </span>
+      </div>
+      <mat-card-content class="p-b-24 p-t-20 relative">
+        <div class="absolute -top-[33px] left-5">
+          <mat-chip matTooltip="Catégorie" color="danger" class="f-s-12 m-y-16 f-w-600">{{
+            productcard.category
+            }}</mat-chip>
+        </div>
+        <button mat-mini-fab color="primary" (click)="openDialog('update',productcard)" class="absolute -top-[20px] right-5" matTooltip="editer ou supprimer">
+          <mat-icon name="add" class="">edit</mat-icon>
+        </button>
+        <mat-card-title class="mat-headline-2 f-s-16 m-b-4">{{
+          productcard.name
+          }}</mat-card-title>
+        <div class="d-flex align-items-center justify-content-between">
+          {{productcard.description}}
+        </div>
+
+        <div class="d-flex align-items-center justify-content-center m-t-24">
+          <div class="d-flex align-items-center">
+            <span matTooltip="Quantité achetés" class="cursor-pointer m-r-12 f-s-14 d-flex align-items-center"><i-tabler
+                name="packages" class="icon-18 m-r-4"></i-tabler>{{ productcard.quantityPurchased }}</span>
+            <span matTooltip="Quantité resté" class="f-s-14 d-flex align-items-center"><i-tabler name="123"
+                class="icon-18 m-r-4"></i-tabler>{{ productcard.quantityPurchased }}</span>
+          </div>
+          <div class="flex-1"> </div>
+          <div class="d-flex align-items-center">
+            <h6 class="mat-body-2 f-w-600">${{ productcard.price }}</h6>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+
+<!-- </mat-card-content> -->
+<!-- </mat-card> -->

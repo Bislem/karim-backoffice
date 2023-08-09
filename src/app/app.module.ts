@@ -28,7 +28,7 @@ import { ComponentsModule } from './common/components/components.module';
 import { AuthInterceptor } from './common/auth/auth.interceptor';
 import { DatePipe } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -67,7 +67,8 @@ export function HttpLoaderFactory(http: HttpClient): any {
       multi: true,
     },
     DatePipe,
-    MatDatepickerModule
+    MatDatepickerModule,
+    { provide: MAT_DATE_LOCALE, useValue: 'fr' }
   ]
 })
 export class AppModule { }

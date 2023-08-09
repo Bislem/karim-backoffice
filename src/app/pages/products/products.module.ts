@@ -1,9 +1,6 @@
 import { inject, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UsersComponent } from './users.component';
 import { ResolveFn, RouterModule, Routes } from '@angular/router';
-import { User } from 'src/app/services/models/User';
-import { UsersService } from './users.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,20 +15,27 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { UsersDialogComponent } from './users-dialog/users-dialog.component';
+import { ProductsService } from './products.service';
+import { Product } from 'src/app/services/models/Product';
+import { ProductsComponent } from './products.component';
+import { ProductsDialogComponent } from './products-dialog/products-dialog.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
-const userResolver: ResolveFn<User[]> = (route, state) => {
-  return inject(UsersService).getAllUsers();
+const productResolver: ResolveFn<Product[]> = (route, state) => {
+  return inject(ProductsService).getAllProducts();
 }
 
 const routes: Routes = [
   {
     path: '',
-    component: UsersComponent,
-    resolve: { main: userResolver },
+    component: ProductsComponent,
+    resolve: { main: productResolver },
     data: {
-      title: 'Gestion des utilisateurs'
+      title: 'Gestion des produits'
     }
   }
 ]
@@ -39,9 +43,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    UsersComponent,
-    UsersDialogComponent,
-    UsersDialogComponent
+    ProductsComponent,
+    ProductsDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -60,10 +63,16 @@ const routes: Routes = [
     MatDatepickerModule,
     MatRadioModule,
     MatCheckboxModule,
-    MatIconModule
+    MatTooltipModule,
+    MatIconModule,
+    MatChipsModule,
+    MatProgressSpinnerModule,
+    MatSlideToggleModule
+
+
   ],
   exports:[
     RouterModule
   ]
 })
-export class UsersModule { }
+export class ProductsModule { }

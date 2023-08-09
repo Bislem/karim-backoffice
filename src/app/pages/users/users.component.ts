@@ -53,9 +53,9 @@ export class UsersComponent implements AfterViewInit, OnInit {
       data: {
         user: user,
         mode: action,
-        title: 'Nouveau Utilisateur'
+        title: action === 'create' ? 'Nouveau Utilisateur' : 'Modifier Utilisateur'
       },
-
+      maxWidth: '600px'
     });
     dialogRef.afterClosed().subscribe((result) => {
     });

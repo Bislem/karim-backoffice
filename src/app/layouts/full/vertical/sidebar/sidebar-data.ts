@@ -14,6 +14,11 @@ export const navItems: NavItem[] = [
     iconName: 'users-group',
     route: '/users',
   },
+  {
+    displayName: 'Gestion de produits',
+    iconName: 'packages',
+    route: '/products',
+  },
   // {
   //   navCap: 'Other',
   // },
