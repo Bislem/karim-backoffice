@@ -23,10 +23,7 @@ export class ProductsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const ps = this.productsService.products.getValue().map((p: Product) => ({
-      ...p,
-      images: JSON.parse(p.images as string) as Attachments[]
-    }) as Product) as Product[];
+    const ps = this.productsService.products.getValue() as Product[];
     this.products = ps;
     this.productsSource = ps;
     this.productsService.products.subscribe(res => {

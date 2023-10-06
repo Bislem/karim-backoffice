@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -33,6 +33,11 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+
+registerLocaleData(localeFr, 'fr');
+
 
 @NgModule({
   declarations: [AppComponent, BlankComponent, FilterPipe],
@@ -68,7 +73,9 @@ export function HttpLoaderFactory(http: HttpClient): any {
     },
     DatePipe,
     MatDatepickerModule,
-    { provide: MAT_DATE_LOCALE, useValue: 'fr' }
+    { provide: MAT_DATE_LOCALE, useValue: 'fr' },
+    { provide: LOCALE_ID, useValue: 'fr' }
+
   ]
 })
 export class AppModule { }

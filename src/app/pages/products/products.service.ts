@@ -22,7 +22,7 @@ export class ProductsService {
       this.http.get(`${environment.API_BASE_URL}/products`).subscribe({
         next: (res: any) => {
           if (res.status) {
-            const products = res.products;
+            const products = res.products.map((p: any) => ({ ...p, images: JSON.parse(p.images) }));
             console.log(products);
             this.products.next(products);
             resolve(this.products.getValue() as Product[])

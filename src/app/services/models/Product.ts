@@ -16,4 +16,6 @@ export interface Product {
     boughtOn: number; //date 
     quantityPurchased: number;//quantite original
     images: Attachments[] | string;//json
+
+    selectedQte?: number;//used only in dialog
 }

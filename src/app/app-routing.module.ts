@@ -13,7 +13,7 @@ const routes: Routes = [
     children: [
       {
         path: 'home',
-        loadChildren: () => import('./pages/pages.module').then((m) => m.PagesModule),
+        loadChildren: () => import('./pages/fullcalendar/fullcalendar.module').then((m) => m.FullcalendarModule),
       },
       {
         path: 'users',
@@ -22,6 +22,10 @@ const routes: Routes = [
       {
         path: 'products',
         loadChildren: () => import("./pages/products/products.module").then(res => res.ProductsModule)
+      },
+      {
+        path: 'reservation',
+        loadChildren: () => import("./pages/reservation/reservation.module").then(res => res.ReservationModule)
       },
       // {
       //   path: '',

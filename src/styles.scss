@@ -7,6 +7,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @tailwind components;
 @tailwind utilities;
 
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+
+
 .mdc-snackbar__surface{
     background: transparent !important;//to show the panel color
 }
