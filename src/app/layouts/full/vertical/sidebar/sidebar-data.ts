@@ -5,20 +5,20 @@ export const navItems: NavItem[] = [
   //   navCap: 'Home',
   // },
   {
-    displayName: 'Home',
+    displayName: 'Services',
     iconName: 'shopping-cart',
-    route: '/home',
+    route: '/services',
   },
-  {
-    displayName: 'Gestion d\'utilisateurs',
-    iconName: 'users-group',
-    route: '/users',
-  },
-  {
-    displayName: 'Gestion de produits',
-    iconName: 'packages',
-    route: '/products',
-  },
+  // {
+  //   displayName: 'Gestion d\'utilisateurs',
+  //   iconName: 'users-group',
+  //   route: '/users',
+  // },
+  // {
+  //   displayName: 'Gestion de produits',
+  //   iconName: 'packages',
+  //   route: '/products',
+  // },
   // {
   //   navCap: 'Other',
   // },

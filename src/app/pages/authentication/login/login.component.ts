@@ -48,7 +48,7 @@ export class AppLoginComponent {
     this.authService.signIn({ ...this.form.value }).then(res => {
       this.isLoading = false;
       if (res) {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/services']);
       } else {
         this.appService.showError('email ou mot de passe erroné');
       }

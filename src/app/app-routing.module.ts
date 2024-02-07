@@ -7,31 +7,21 @@ import { FullComponent } from './layouts/full/full.component';
 
 const routes: Routes = [
   {
+    path: '', pathMatch: 'full',redirectTo: '/services',
+  },
+  {
     path: '',
     component: FullComponent,
-    canActivate: [authGuard],
+    // canActivate: [authGuard],
     children: [
-      {
-        path: 'home',
-        loadChildren: () => import('./pages/fullcalendar/fullcalendar.module').then((m) => m.FullcalendarModule),
-      },
-      {
-        path: 'users',
-        loadChildren: () => import("./pages/users/users.module").then(res => res.UsersModule)
-      },
-      {
-        path: 'products',
-        loadChildren: () => import("./pages/products/products.module").then(res => res.ProductsModule)
-      },
-      {
-        path: 'reservation',
-        loadChildren: () => import("./pages/reservation/reservation.module").then(res => res.ReservationModule)
-      },
       // {
-      //   path: '',
-      //   redirectTo: '/home',
-      //   pathMatch: 'full',
+      //   path: 'users',
+      //   loadChildren: () => import("./pages/users/users.module").then(res => res.UsersModule)
       // },
+      {
+        path: 'services',
+        loadChildren: () => import("./pages/services/services.module").then(res => res.ServicesModule)
+      },
     ],
   },
   {

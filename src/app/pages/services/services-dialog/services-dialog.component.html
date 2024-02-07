@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>{{title}}</h2>
 <mat-dialog-content class="mat-typography">
-  <form class="row" [formGroup]="productForm">
+  <form class="row" [formGroup]="serviceForm">
     <div class="col">
       <!-- input -->
       <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Nom du produit</mat-label>
@@ -123,9 +123,9 @@
   <h2 class="font-bold text-lg ml-2 mt-3">Pièces jointes</h2>
   <div class="row px-5 pt-4">
     <!-- here loop the assets  -->
-    <div *ngFor="let att of pickedImages; let i=index" class="relative rounded-xl overflow-hidden shadow-xl m-3 group">
-      <img src="{{att.url}}" alt="" class="object-cover h-32 w-32">
-      <button class="absolute opacity-0 text-white group-hover:opacity-100 transition-all top-1 right-1" (click)="removeAtt(i)" color="warn" mat-icon-button>
+    <div class="relative rounded-xl overflow-hidden shadow-xl m-3 group">
+      <img src="{{pickedImage}}" alt="" class="object-cover h-32 w-32">
+      <button class="absolute opacity-0 text-white group-hover:opacity-100 transition-all top-1 right-1" (click)="removeImg()" color="warn" mat-icon-button>
         <mat-icon class="text-red-400">delete</mat-icon>
       </button>
 
@@ -133,13 +133,13 @@
     </div>
 
     <!-- add button  -->
-    <div (click)="filePicker.click()"
+    <div *ngIf="!pickedImage" (click)="filePicker.click()"
       class="border-dashed border-2 m-3 cursor-pointer hover:bg-slate-200 transition-all border-slate-400 flex items-center justify-center rounded-xl h-32 w-32">
       <mat-icon>add</mat-icon>
     </div>
   </div>
 
-  <input type="file" class="hidden" (input)="filesPicked($event)" multiple #filePicker accept="image/*">
+  <input type="file" class="hidden" (input)="filePicked($event)" #filePicker accept="image/*">
 </mat-dialog-content>
 <mat-dialog-actions align="end" class="px-5 pb-5 ">
   <button mat-raised-button mat-dialog-close>Annuler</button>

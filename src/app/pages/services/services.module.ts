@@ -15,25 +15,20 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { ProductsService } from './products.service';
-import { Product } from 'src/app/services/models/Product';
-import { ProductsComponent } from './products.component';
-import { ProductsDialogComponent } from './products-dialog/products-dialog.component';
+import { ServicesComponent } from './services.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ServicessDialogComponent } from './services-dialog/services-dialog.component';
+import { ServicesService } from './services.service';
 
-const productResolver: ResolveFn<Product[]> = (route, state) => {
-  return inject(ProductsService).getAllProducts();
-}
 
 const routes: Routes = [
   {
     path: '',
-    component: ProductsComponent,
-    resolve: { main: productResolver },
+    component: ServicesComponent,
     data: {
       title: 'Gestion des produits'
     }
@@ -43,14 +38,14 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    ProductsComponent,
-    ProductsDialogComponent,
+    ServicesComponent,
+    ServicessDialogComponent,
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     MatFormFieldModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
     MatInputModule,
@@ -71,8 +66,8 @@ const routes: Routes = [
 
 
   ],
-  exports:[
+  exports: [
     RouterModule
   ]
 })
-export class ProductsModule { }
+export class ServicesModule { }

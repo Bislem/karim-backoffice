@@ -1,21 +1,21 @@
 import { Attachments } from "./Attachments";
 
-export interface Product {
+export interface Service {
     id: number;
     name: string;
-    description: string;
-    ref: string;
-    category: string;
-    allowedLevel: number; //small number (1,2,3)
-    place: string;
-    price: number;
-    isExternal: boolean;
-    quantity: number;
-    created_at: number;//date
-    update_at: number; //date
-    boughtOn: number; //date 
-    quantityPurchased: number;//quantite original
-    images: Attachments[] | string;//json
+    image: string;
+    data: Data[];
+    pricing: Pricing[];
+}
 
-    selectedQte?: number;//used only in dialog
+
+export class Data {
+    label: string;
+    value: string;
+}
+export class Pricing {
+    price: number;
+    name: string;
+    cta: string;//url
+    data: Data[];
 }

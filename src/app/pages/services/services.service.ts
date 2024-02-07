@@ -2,30 +2,30 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Attachments } from 'src/app/services/models/Attachments';
-import { Product } from 'src/app/services/models/Product';
+import { Service } from 'src/app/services/models/Product';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductsService {
+export class ServicesService {
 
-  products: BehaviorSubject<Product[]> = new BehaviorSubject([] as Product[]);
+  services: BehaviorSubject<Service[]> = new BehaviorSubject([] as Service[]);
 
   constructor(
     private http: HttpClient
   ) { }
 
 
-  getAllProducts() {
-    return new Promise<Product[]>((resolve, reject) => {
-      this.http.get(`${environment.API_BASE_URL}/products`).subscribe({
+  getAllServices() {
+    return new Promise<Service[]>((resolve, reject) => {
+      this.http.get(`${environment.API_BASE_URL}/services`).subscribe({
         next: (res: any) => {
           if (res.status) {
-            const products = res.products.map((p: any) => ({ ...p, images: JSON.parse(p.images) }));
-            console.log(products);
-            this.products.next(products);
-            resolve(this.products.getValue() as Product[])
+            const services = res.services.map((p: any) => ({ ...p, images: JSON.parse(p.images) }));
+            console.log(services);
+            this.services.next(services);
+            resolve(this.services.getValue() as Service[])
           } else {
             resolve([]);
           }
@@ -38,14 +38,14 @@ export class ProductsService {
     });
   }
 
-  createProduct(product: Product) {
+  createService(service: Service) {
     return new Promise<boolean>((resolve, reject) => {
-      this.http.post(`${environment.API_BASE_URL}/products`, { ...product }).subscribe({
+      this.http.post(`${environment.API_BASE_URL}/services`, { ...service }).subscribe({
         next: (res: any) => {
           if (res.status) {
-            const products = this.products.getValue();
-            products.push(res.product);
-            this.products.next(products);
+            const services = this.services.getValue();
+            services.push(res.product);
+            this.services.next(services);
             resolve(true)
           } else {
             resolve(false);
@@ -60,15 +60,15 @@ export class ProductsService {
   }
 
 
-  updateProduct(product: Product) {
+  updateService(service: Service) {
     return new Promise<boolean>((resolve, reject) => {
-      this.http.put(`${environment.API_BASE_URL}/products`, { ...product }).subscribe({
+      this.http.put(`${environment.API_BASE_URL}/products`, { ...service }).subscribe({
         next: (res: any) => {
           if (res.status) {
-            const products = this.products.getValue();
+            const products = this.services.getValue();
             const index = products.findIndex(u => u.id === res.product.id);
             products[index] = res.product;
-            this.products.next(products);
+            this.services.next(products);
             resolve(true)
           } else {
             resolve(false);
@@ -82,15 +82,15 @@ export class ProductsService {
     });
   }
 
-  deleteProduct(product: Product) {
+  deleteService(service: Service) {
     return new Promise<boolean>((resolve, reject) => {
-      this.http.delete(`${environment.API_BASE_URL}/products/${product.id}`).subscribe({
+      this.http.delete(`${environment.API_BASE_URL}/products/${service.id}`).subscribe({
         next: (res: any) => {
           if (res.status) {
-            const products = this.products.getValue();
-            const index = products.findIndex(u => u.id === res.product.id);
-            products.splice(index, 1);
-            this.products.next(products);
+            const services = this.services.getValue();
+            const index = services.findIndex(u => u.id === res.product.id);
+            services.splice(index, 1);
+            this.services.next(services);
             resolve(true);
           } else {
             resolve(false);
