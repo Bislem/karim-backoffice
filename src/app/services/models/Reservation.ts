@@ -1,4 +1,4 @@
-import { Product } from "./Product";
+import { Product } from "./Service";
 import { User } from "./User";
 
 export interface Reservation {

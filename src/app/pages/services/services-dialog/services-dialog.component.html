@@ -3,7 +3,7 @@
   <form class="row" [formGroup]="serviceForm">
     <div class="col">
       <!-- input -->
-      <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Nom du produit</mat-label>
+      <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Nom du Service</mat-label>
       <mat-form-field appearance="outline" class="w-100">
         <input formControlName="name" type="text" matInput placeholder="Nom du produit" />
         <mat-icon matPrefix>
@@ -12,138 +12,84 @@
       </mat-form-field>
     </div>
 
-    <div class="col-12">
-      <!-- input -->
-      <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Description</mat-label>
-      <mat-form-field appearance="outline" class="w-100">
-        <textarea formControlName="description" type="text" matInput placeholder="Description">
-        </textarea>
-      </mat-form-field>
+    <!-- image attachment  -->
+    <div class="w-full px-5 pt-4">
+      <!-- here loop the assets  -->
+      <div *ngIf="pickedImage" class="relative rounded-xl overflow-hidden shadow-xl m-3 group">
+        <img src="{{pickedImage}}" alt="" class="object-cover h-32 w-32">
+        <button class="absolute opacity-0 text-white group-hover:opacity-100 transition-all top-1 right-1"
+          (click)="removeImg()" color="warn" mat-icon-button>
+          <mat-icon class="text-red-400">delete</mat-icon>
+        </button>
+      </div>
+      <!-- add button  -->
+      <div *ngIf="!pickedImage" (click)="filePicker.click()"
+        class="border-dashed border-2 m-3 cursor-pointer hover:bg-slate-200 transition-all border-slate-400 flex items-center justify-center rounded-xl h-32 w-32">
+        <mat-icon>add</mat-icon>
+      </div>
+    </div>
+
+
+    <!-- data field  -->
+    <div class="flex flex-col px-5" formArrayName="data">
+      <div class="w-full flex flex-row items-center" *ngFor="let item of dataValue.controls;let i=index">
+        <ng-container [formGroup]="$any(item)">
+          <mat-form-field appearance="outline" class="mr-3">
+            <input formControlName="label" type="text" matInput placeholder="Label" />
+            <mat-icon matPrefix>
+              <i-tabler name="package" class="icon-20 d-flex"></i-tabler>
+            </mat-icon>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="">
+            <input formControlName="value" type="text" matInput placeholder="Valeur" />
+            <mat-icon matPrefix>
+              <i-tabler name="package" class="icon-20 d-flex"></i-tabler>
+            </mat-icon>
+          </mat-form-field>
+          <button class="self-center" mat-icon-button (click)="removeData(i)"><mat-icon>delete</mat-icon></button>
+        </ng-container>
+      </div>
+      <button  mat-stroked-button (click)="addData()"><mat-icon>add</mat-icon></button>
     </div>
 
 
 
-    <div class="col-md-6">
-      <!-- input -->
-      <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Catégorie</mat-label>
-      <mat-form-field appearance="outline" class="w-100">
-        <mat-select formControlName="category" value="son" placeholder="Catégorie">
-          <mat-option value="son">SON</mat-option>
-          <mat-option value="lumiere">LUMIÈRE</mat-option>
-          <mat-option value="image">IMAGE</mat-option>
-          <mat-option value="moniteur">MONITEUR</mat-option>
-          <mat-option value="trepieds">TREPIEDS</mat-option>
-          <mat-option value="machinerie">MACHINERIE</mat-option>
-          <mat-option value="autres">AUTRES</mat-option>
-        </mat-select>
-        <mat-icon matPrefix>
-          <i-tabler name="category" class="icon-20 d-flex"></i-tabler>
-        </mat-icon>
-      </mat-form-field>
-    </div>
-
-    <div class="col-md-6">
-      <!-- input -->
-      <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Référence</mat-label>
-      <mat-form-field appearance="outline" class="w-100">
-        <input formControlName="ref" type="text" matInput placeholder="Référence" />
-        <mat-icon matPrefix>
-          <i-tabler name="file-barcode" class="icon-20 d-flex"></i-tabler>
-        </mat-icon>
-      </mat-form-field>
-    </div>
-
-    <div class="col-md-6">
-      <!-- input -->
-      <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Degrés Etudiants</mat-label>
-      <mat-form-field appearance="outline" class="w-100">
-        <mat-select formControlName="allowedLevel" value="1" placeholder="Degrés Etudiants">
-          <mat-option value="1" selected="">Réal. 1ère</mat-option>
-          <mat-option value="2">Réal. 2ère</mat-option>
-          <mat-option value="3">Journalise</mat-option>
-        </mat-select>
-        <mat-icon matPrefix>
-          <i-tabler name="school" class="icon-20 d-flex"></i-tabler>
-        </mat-icon>
-      </mat-form-field>
-    </div>
-
-    <div class="col-md-6">
-      <!-- input -->
-      <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Lieu</mat-label>
-      <mat-form-field appearance="outline" class="w-100">
-        <mat-select formControlName="place" value="Geneve" placeholder="Lieu">
-          <mat-option value="Geneve" selected="">Genève</mat-option>
-          <mat-option value="Lausanne">Lausanne</mat-option>
-        </mat-select>
-        <mat-icon matPrefix>
-          <i-tabler name="map-pin" class="icon-20 d-flex"></i-tabler>
-        </mat-icon>
-      </mat-form-field>
-    </div>
-
-    <div class="col-md-6">
-      <!-- input -->
-      <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Tarif location</mat-label>
-      <mat-form-field appearance="outline" class="w-100">
-        <input formControlName="price" type="number" matInput placeholder="Tarif location" />
-        <mat-icon matSuffix>
-          <i-tabler name="currency-euro" class="icon-20 d-flex"></i-tabler>
-        </mat-icon>
-      </mat-form-field>
-    </div>
-
-    <div class="col-md-6">
-      <!-- input -->
-      <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block">Quantité</mat-label>
-      <mat-form-field appearance="outline" class="w-100">
-        <input formControlName="quantity" type="number" matInput placeholder="Quantité" />
-        <mat-icon matPrefix>
-          <i-tabler name="123" class="icon-20 d-flex"></i-tabler>
-        </mat-icon>
-      </mat-form-field>
+    <!-- pricing field  -->
+    <div class="flex flex-col px-5" formArrayName="pricing">
+      <div class="w-full flex flex-row items-center" *ngFor="let item of pricingValue.controls;let i=index">
+        <ng-container [formGroup]="$any(item)">
+          <mat-form-field appearance="outline" class="mr-3">
+            <input formControlName="label" type="text" matInput placeholder="Label" />
+            <mat-icon matPrefix>
+              <i-tabler name="package" class="icon-20 d-flex"></i-tabler>
+            </mat-icon>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="">
+            <input formControlName="value" type="text" matInput placeholder="Valeur" />
+            <mat-icon matPrefix>
+              <i-tabler name="package" class="icon-20 d-flex"></i-tabler>
+            </mat-icon>
+          </mat-form-field>
+          <button class="self-center" mat-icon-button (click)="removePricing(i)"><mat-icon>delete</mat-icon></button>
+        </ng-container>
+      </div>
+      <button  mat-stroked-button (click)="addPricing()"><mat-icon>add</mat-icon></button>
     </div>
 
 
     <div class="col-12">
-      <mat-label class="font-bold">Acheté le</mat-label>
-      <mat-form-field appearance="outline" placeholder="Acheté le" class="w-100">
-        <input formControlName="boughtOn" matInput [matDatepicker]="picker" />
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-    </div>
-
-    <div class="col-12">
-      <mat-slide-toggle class="py-4" color="primary" formControlName="isExternal">Externe ?</mat-slide-toggle>
+      <mat-slide-toggle class="py-4" color="primary" formControlName="isExternal">Publier ?</mat-slide-toggle>
     </div>
 
   </form>
-  <h2 class="font-bold text-lg ml-2 mt-3">Pièces jointes</h2>
-  <div class="row px-5 pt-4">
-    <!-- here loop the assets  -->
-    <div class="relative rounded-xl overflow-hidden shadow-xl m-3 group">
-      <img src="{{pickedImage}}" alt="" class="object-cover h-32 w-32">
-      <button class="absolute opacity-0 text-white group-hover:opacity-100 transition-all top-1 right-1" (click)="removeImg()" color="warn" mat-icon-button>
-        <mat-icon class="text-red-400">delete</mat-icon>
-      </button>
 
-
-    </div>
-
-    <!-- add button  -->
-    <div *ngIf="!pickedImage" (click)="filePicker.click()"
-      class="border-dashed border-2 m-3 cursor-pointer hover:bg-slate-200 transition-all border-slate-400 flex items-center justify-center rounded-xl h-32 w-32">
-      <mat-icon>add</mat-icon>
-    </div>
-  </div>
 
   <input type="file" class="hidden" (input)="filePicked($event)" #filePicker accept="image/*">
 </mat-dialog-content>
 <mat-dialog-actions align="end" class="px-5 pb-5 ">
   <button mat-raised-button mat-dialog-close>Annuler</button>
-  <button *ngIf="mode === 'update'" class="text-white" mat-raised-button color="warn" (click)="deleteProduct()">Supprimer</button>
+  <button *ngIf="mode === 'update'" class="text-white" mat-raised-button color="warn"
+    (click)="deleteProduct()">Supprimer</button>
   <button mat-raised-button color="primary" [disabled]="loading" (click)="submit()" cdkFocusInitial>
     {{ loading ? '' : mode === 'create' ? 'Créer' :
     'Modifier'}}

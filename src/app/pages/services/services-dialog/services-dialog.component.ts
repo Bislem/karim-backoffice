@@ -1,11 +1,11 @@
 import { DatePipe } from '@angular/common';
 import { Component, Inject, OnInit, Optional } from '@angular/core';
-import { FormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as moment from 'moment';
 import { AppService } from 'src/app/services/app.service';
 import { Attachments } from 'src/app/services/models/Attachments';
-import { Service } from 'src/app/services/models/Product';
+import { Service } from 'src/app/services/models/Service';
 import { User } from 'src/app/services/models/User';
 import { ServicesService } from '../services.service';
 
@@ -43,6 +43,25 @@ export class ServicessDialogComponent implements OnInit {
     if (this.mode === 'create') {
       this.serviceForm = new UntypedFormGroup({
         name: new FormControl(null, [Validators.required]),
+        data: new FormArray([
+          new FormGroup({
+            label: new FormControl(null, [Validators.required]),
+            value: new FormControl(null, [Validators.required]),
+          })
+        ],),
+        pricing: new FormArray([
+          new FormGroup({
+            price: new FormControl(null, [Validators.required]),
+            name: new FormControl(null, [Validators.required]),
+            cta: new FormControl(null,),
+            data: new FormArray([
+              new FormGroup({
+                label: new FormControl(null, [Validators.required]),
+                value: new FormControl(null, [Validators.required]),
+              })
+            ],),
+          })
+        ],),
 
       });
     } else {
@@ -54,7 +73,69 @@ export class ServicessDialogComponent implements OnInit {
     }
   }
 
+  get dataValue() {
+    return this.serviceForm.get('data') as FormArray<any>;
+  }
+
+
+  get pricingValue() {
+    return this.serviceForm.get('data') as FormArray;
+  }
+
+  getDataValueForPricing(index: number) {
+    const formArray = this.serviceForm.get('pricing') as FormArray;
+    const item = formArray.at(index) as FormGroup;
+    return item;
+  }
+
+  addData() {
+    this.dataValue.push(new FormGroup({
+      label: new FormControl(null, [Validators.required]),
+      value: new FormControl(null, [Validators.required]),
+    }))
+  }
+
+  removeData(index: number) {
+    this.dataValue.removeAt(index);
+  }
+
+  addPricing() {
+    this.pricingValue.push(new FormGroup({
+      price: new FormControl(null, [Validators.required]),
+      name: new FormControl(null, [Validators.required]),
+      cta: new FormControl(null,),
+      data: new FormArray([
+        new FormGroup({
+          label: new FormControl(null, [Validators.required]),
+          value: new FormControl(null, [Validators.required]),
+        })
+      ],),
+    }))
+  }
+
+  removePricing(index: number) {
+    this.pricingValue.removeAt(index);
+  }
+
+  addPricingData(index: number) {
+    const item = this.pricingValue.at(index);
+    const formArray = item.get('data') as FormArray;
+    formArray.push(new FormGroup({
+      label: new FormControl(null, [Validators.required]),
+      value: new FormControl(null, [Validators.required]),
+    }));
+  }
+
+  removePricingData(parentIndex: number, index: number) {
+    const item = this.pricingValue.at(parentIndex);
+    const formArray = item.get('data') as FormArray;
+    formArray.removeAt(index);
+  }
+
+
   submit() {
+    console.log(this.serviceForm.value);
+    return;
     if (this.serviceForm.invalid) {
       this.appService.showError('merci de bien remplir le formulaire');
       return;

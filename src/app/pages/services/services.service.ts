@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Attachments } from 'src/app/services/models/Attachments';
-import { Service } from 'src/app/services/models/Product';
+import { Service } from 'src/app/services/models/Service';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

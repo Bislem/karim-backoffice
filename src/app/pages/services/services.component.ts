@@ -5,7 +5,7 @@ import { AppService } from 'src/app/services/app.service';
 import { ServicesService } from './services.service';
 import { Attachments } from 'src/app/services/models/Attachments';
 import { ServicessDialogComponent } from './services-dialog/services-dialog.component';
-import { Service } from 'src/app/services/models/Product';
+import { Service } from 'src/app/services/models/Service';
 
 @Component({
   templateUrl: './services.component.html',
