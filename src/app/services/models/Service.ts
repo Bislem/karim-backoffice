@@ -3,9 +3,11 @@ import { Attachments } from "./Attachments";
 export interface Service {
     id: number;
     name: string;
-    image: string;
+    cover: string;
+    icon: string;
     data: Data[];
     pricing: Pricing[];
+    publish: boolean;
 }
 
 

@@ -25,6 +25,7 @@ export class ServicesComponent implements OnInit {
 
   ngOnInit(): void {
     this.serviceService.getAllServices().then(res => {
+      console.log(res);
       res.map(p => ({
         ...p,
       }) as Service) as Service[];

@@ -24,7 +24,7 @@
   <div class="col-sm-6 col-lg-3" *ngFor="let productcard of services">
     <mat-card class="cardWithShadow productcard overflow-hidden">
       <div class="group">
-        <img src="{{productcard.image && productcard.image.length > 0 ? productcard.image : '/assets/images/image.png'}}" alt="imgSrc" class="w-100"
+        <img src="{{productcard.cover && productcard.cover.length > 0 ? productcard.cover : '/assets/images/image.png'}}" alt="imgSrc" class="w-100"
           mat-card-image />
       </div>
       <mat-card-content class="p-b-24 p-t-20 relative">

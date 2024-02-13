@@ -22,10 +22,10 @@ export class ServicesService {
       this.http.get(`${environment.API_BASE_URL}/services`).subscribe({
         next: (res: any) => {
           if (res.status) {
-            const services = res.services.map((p: any) => ({ ...p, images: JSON.parse(p.images) }));
+            const services = res.services;
             console.log(services);
             this.services.next(services);
-            resolve(this.services.getValue() as Service[])
+            resolve(services as Service[])
           } else {
             resolve([]);
           }
@@ -44,7 +44,7 @@ export class ServicesService {
         next: (res: any) => {
           if (res.status) {
             const services = this.services.getValue();
-            services.push(res.product);
+            services.push(res.service);
             this.services.next(services);
             resolve(true)
           } else {
@@ -62,12 +62,12 @@ export class ServicesService {
 
   updateService(service: Service) {
     return new Promise<boolean>((resolve, reject) => {
-      this.http.put(`${environment.API_BASE_URL}/products`, { ...service }).subscribe({
+      this.http.put(`${environment.API_BASE_URL}/services`, { ...service }).subscribe({
         next: (res: any) => {
           if (res.status) {
             const products = this.services.getValue();
-            const index = products.findIndex(u => u.id === res.product.id);
-            products[index] = res.product;
+            const index = products.findIndex(u => u.id === res.service.id);
+            products[index] = res.service;
             this.services.next(products);
             resolve(true)
           } else {
@@ -88,7 +88,7 @@ export class ServicesService {
         next: (res: any) => {
           if (res.status) {
             const services = this.services.getValue();
-            const index = services.findIndex(u => u.id === res.product.id);
+            const index = services.findIndex(u => u.id === res.service.id);
             services.splice(index, 1);
             this.services.next(services);
             resolve(true);

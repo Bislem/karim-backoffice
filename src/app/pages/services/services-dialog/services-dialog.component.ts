@@ -22,7 +22,7 @@ export class ServicessDialogComponent implements OnInit {
   loading = false;
 
   pickedImage: string | undefined;
-
+  pickedIcon: string | undefined;
   constructor(
     public datePipe: DatePipe,
     public dialogRef: MatDialogRef<ServicessDialogComponent>,
@@ -43,12 +43,13 @@ export class ServicessDialogComponent implements OnInit {
     if (this.mode === 'create') {
       this.serviceForm = new UntypedFormGroup({
         name: new FormControl(null, [Validators.required]),
+        publish: new FormControl(false, [Validators.required]),
         data: new FormArray([
           new FormGroup({
             label: new FormControl(null, [Validators.required]),
             value: new FormControl(null, [Validators.required]),
           })
-        ],),
+        ], [Validators.maxLength(4)]),
         pricing: new FormArray([
           new FormGroup({
             price: new FormControl(null, [Validators.required]),
@@ -65,11 +66,39 @@ export class ServicessDialogComponent implements OnInit {
 
       });
     } else {
-      this.pickedImage = this.service?.image;
-      this.serviceForm = new UntypedFormGroup({
-        name: new FormControl(this.service?.name, [Validators.required]),
-
-      });
+      this.pickedImage = this.service?.cover;
+      this.pickedIcon = this.service?.cover;
+      if (this.data.service) {
+        this.serviceForm = new UntypedFormGroup({
+          name: new FormControl(this.data.service.name, [Validators.required]),
+          publish: new FormControl(this.data.service.publish, [Validators.required]),
+          data: new FormArray([
+            ...this.data.service.data.map(item => (
+              new FormGroup({
+                label: new FormControl(item.label, [Validators.required]),
+                value: new FormControl(item.value, [Validators.required]),
+              })
+            ))
+          ], [Validators.maxLength(4)]),
+          pricing: new FormArray([
+            ...this.data.service.pricing.map(item => (
+              new FormGroup({
+                price: new FormControl(item.price, [Validators.required]),
+                name: new FormControl(item.name, [Validators.required]),
+                cta: new FormControl(item.cta,),
+                data: new FormArray([
+                  ...item.data.map(d => (
+                    new FormGroup({
+                      label: new FormControl(d.label, [Validators.required]),
+                      value: new FormControl(d.value, [Validators.required]),
+                    })
+                  ))
+                ],),
+              })
+            ))
+          ],),
+        });
+      }
     }
   }
 
@@ -79,13 +108,13 @@ export class ServicessDialogComponent implements OnInit {
 
 
   get pricingValue() {
-    return this.serviceForm.get('data') as FormArray;
+    return this.serviceForm.get('pricing') as FormArray;
   }
 
   getDataValueForPricing(index: number) {
     const formArray = this.serviceForm.get('pricing') as FormArray;
     const item = formArray.at(index) as FormGroup;
-    return item;
+    return item.get('data') as FormArray;
   }
 
   addData() {
@@ -134,14 +163,23 @@ export class ServicessDialogComponent implements OnInit {
 
 
   submit() {
-    console.log(this.serviceForm.value);
-    return;
     if (this.serviceForm.invalid) {
-      this.appService.showError('merci de bien remplir le formulaire');
+      this.appService.showError('Please fill the form');
+      return;
+    }
+
+    if (!this.pickedIcon) {
+      this.appService.showError('Please upload an image for the service icon');
+      return;
+    }
+    if (!this.pickedImage) {
+      this.appService.showError('Please upload an image for the cover');
       return;
     }
     const product = {
       ...this.serviceForm.value,
+      cover: this.pickedImage,
+      icon: this.pickedIcon,
     } as Service;
 
     console.log(product);
@@ -176,16 +214,30 @@ export class ServicessDialogComponent implements OnInit {
 
   async filePicked(event: any) {
     this.loading = true;
-    const file = event.target.file;
-    const attachements = await this.ServiceService.uploadFiles([file]);
+    const files = event.target.files;
+    const attachements = await this.ServiceService.uploadFiles(files);
     if (attachements) {
       this.pickedImage = attachements[0].url;
     }
     this.loading = false;
   }
 
+  async filePicked2(event: any) {
+    this.loading = true;
+    const files = event.target.files;
+    const attachements = await this.ServiceService.uploadFiles(files);
+    if (attachements) {
+      this.pickedIcon = attachements[0].url;
+    }
+    this.loading = false;
+  }
+
   removeImg() {
     this.pickedImage = undefined;
+  }
+
+  removeImg2() {
+    this.pickedIcon = undefined;
   }
 
   async deleteProduct() {
