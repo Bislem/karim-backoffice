@@ -84,7 +84,7 @@ export class ServicesService {
 
   deleteService(service: Service) {
     return new Promise<boolean>((resolve, reject) => {
-      this.http.delete(`${environment.API_BASE_URL}/products/${service.id}`).subscribe({
+      this.http.delete(`${environment.API_BASE_URL}/services/${service.id}`).subscribe({
         next: (res: any) => {
           if (res.status) {
             const services = this.services.getValue();

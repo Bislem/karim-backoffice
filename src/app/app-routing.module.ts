@@ -7,7 +7,7 @@ import { FullComponent } from './layouts/full/full.component';
 
 const routes: Routes = [
   {
-    path: '', pathMatch: 'full',redirectTo: '/services',
+    path: '', pathMatch: 'full', redirectTo: '/services',
   },
   {
     path: '',
@@ -42,7 +42,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule],
 })
 export class AppRoutingModule { }

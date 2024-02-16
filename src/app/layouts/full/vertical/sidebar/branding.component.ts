@@ -9,11 +9,12 @@ import { CoreService } from 'src/app/services/core.service';
   template: `
     <div class="branding">
       <a href="/" *ngIf="options.theme === 'light'">
-        <img
+      <h2 class="font-extrabold text-2xl text-center uppercase">tv<span class="text-blue-500">pro</span>smart</h2>
+        <!-- <img
           src="./assets/images/logo.png"
           class="align-middle m-2"
           alt="logo"
-        />
+        /> -->
       </a>
       <a href="/" *ngIf="options.theme === 'dark'">
         <img

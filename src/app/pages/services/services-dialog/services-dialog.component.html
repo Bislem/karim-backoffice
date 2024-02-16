@@ -15,8 +15,8 @@
     <!-- cover attachment  -->
     <div class="w-full px-5 pt-4">
       <!-- here loop the assets  -->
-      <div *ngIf="pickedImage" class="relative rounded-xl overflow-hidden shadow-xl m-3 group">
-        <img src="{{pickedImage}}" alt="" class="object-cover h-32 w-32">
+      <div *ngIf="pickedImage" class="relative rounded-xl overflow-hidden flex flex-row justify-center items-center m-3 group">
+        <img src="{{pickedImage}}" alt="" class="object-cover h-44 w-auto">
         <button class="absolute opacity-0 text-white group-hover:opacity-100 transition-all top-1 right-1"
           (click)="removeImg()" color="warn" mat-icon-button>
           <mat-icon class="text-red-400">delete</mat-icon>
@@ -33,7 +33,7 @@
     <!-- icon attachment  -->
     <div class="w-full px-5 pt-4">
       <!-- here loop the assets  -->
-      <div *ngIf="pickedIcon" class="relative rounded-xl overflow-hidden shadow-xl m-3 group">
+      <div *ngIf="pickedIcon" class="relative rounded-xl overflow-hidden flex flex-row justify-center items-center m-3 group">
         <img src="{{pickedIcon}}" alt="" class="object-cover h-32 w-32">
         <button class="absolute opacity-0 text-white group-hover:opacity-100 transition-all top-1 right-1"
           (click)="removeImg2()" color="warn" mat-icon-button>

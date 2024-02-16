@@ -30,7 +30,7 @@ const routes: Routes = [
     path: '',
     component: ServicesComponent,
     data: {
-      title: 'Gestion des produits'
+      title: 'Gestion des services'
     }
   }
 ]

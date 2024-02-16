@@ -53,7 +53,7 @@ export class ServicesComponent implements OnInit {
       data: {
         service: service,
         mode: action,
-        title: action === 'create' ? 'Nouveau Produit' : 'Modifier Produit'
+        title: action === 'create' ? 'Nouveau service' : 'Modifier service'
       },
       maxWidth: '700px'
     });

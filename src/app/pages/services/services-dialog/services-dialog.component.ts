@@ -67,7 +67,7 @@ export class ServicessDialogComponent implements OnInit {
       });
     } else {
       this.pickedImage = this.service?.cover;
-      this.pickedIcon = this.service?.cover;
+      this.pickedIcon = this.service?.icon;
       if (this.data.service) {
         this.serviceForm = new UntypedFormGroup({
           name: new FormControl(this.data.service.name, [Validators.required]),
@@ -186,7 +186,7 @@ export class ServicessDialogComponent implements OnInit {
     if (this.mode === 'create') {
       this.ServiceService.createService(product).then(res => {
         if (res) {
-          this.appService.showSuccess('Produit créé avec succès');
+          this.appService.showSuccess('service créé avec succès');
         } else {
           this.appService.showError('Une erreur est survenue');
         }
@@ -195,7 +195,7 @@ export class ServicessDialogComponent implements OnInit {
     } else {
       this.ServiceService.updateService({ ...product, id: this.service?.id as any }).then(res => {
         if (res) {
-          this.appService.showSuccess('Produit modifié avec succès');
+          this.appService.showSuccess('service modifié avec succès');
         } else {
           this.appService.showError('Une erreur est survenue');
         }

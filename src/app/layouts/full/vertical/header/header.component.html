@@ -76,7 +76,8 @@
   <span class="flex-1-auto"></span>
 
   <!-- Mobile Menu -->
-  <button *ngIf="false" mat-icon-button (click)="toggleMobileFilterNav.emit()" class="d-flex d-lg-none justify-content-center">
+  <button *ngIf="false" mat-icon-button (click)="toggleMobileFilterNav.emit()"
+    class="d-flex d-lg-none justify-content-center">
     <i-tabler name="grid-dots" class="icon-20 d-flex"></i-tabler>
   </button>
 
@@ -133,17 +134,17 @@
     <img src="/assets/images/profile/user-1.jpg" class="rounded-circle object-cover" width="35" />
   </button>
   <mat-menu #profilemenu="matMenu" class="topbar-dd cardWithShadow">
-    <ng-scrollbar class="position-relative" style="height: 250px;">
+    <ng-scrollbar class="position-relative" style="height: 150px;">
       <div class="p-x-32 p-y-16">
 
         <div class="d-flex align-items-center p-b-24 b-b-1 m-t-1 flex-1">
           <!-- <img src="/assets/images/profile/user-1.jpg" class="rounded-circle" width="95" /> -->
           <div class="m-l-1 w-full">
-            <h6 class="f-s-18 f-w-600 m-0">{{user?.firstName + ' ' + user?.lastName}}
+            <!-- <h6 class="f-s-18 f-w-600 m-0">{{user?.firstName + ' ' + user?.lastName}}
               <span class="m-l-auto float-right">
                 <span class="bg-primary text-white p-x-8 p-y-4 f-w-500 rounded f-s-12">{{user?.role}}</span>
               </span>
-            </h6>
+            </h6> -->
             <!-- <span class="f-s-14 d-block m-b-4"></span> -->
             <span class="d-flex align-items-center">
               <i-tabler name="mail" class="icon-15 m-r-4"></i-tabler>
@@ -152,7 +153,7 @@
           </div>
         </div>
       </div>
-      <div class="p-x-32">
+      <div *ngIf="false" class="p-x-32">
         <a class="p-y-16 text-decoration-none d-block text-hover-primary" [routerLink]="[profile.link]"
           *ngFor="let profile of profiledd">
           <div class="d-flex align-items-center">

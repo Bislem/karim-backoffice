@@ -3,7 +3,7 @@
     <div class="row justify-content-between">
       <div class="col-lg-4">
         <mat-form-field appearance="outline" class="w-100 hide-hint">
-          <input matInput placeholder="Chercher un produit" (keyup)= "applyFilter($any($event.target).value)" />
+          <input matInput placeholder="Chercher un Service" (keyup)= "applyFilter($any($event.target).value)" />
           <mat-icon matSuffix>
             <i-tabler name="search" class="icon-20"></i-tabler>
           </mat-icon>
@@ -28,20 +28,18 @@
           mat-card-image />
       </div>
       <mat-card-content class="p-b-24 p-t-20 relative">
-        <div class="absolute -top-[33px] left-5">
+        <!-- <div class="absolute -top-[33px] left-5">
           <mat-chip matTooltip="Catégorie" color="danger" class="f-s-12 m-y-16 f-w-600">{{
             productcard.id
             }}</mat-chip>
-        </div>
+        </div> -->
         <button mat-mini-fab color="primary" (click)="openDialog('update',productcard)" class="absolute -top-[20px] right-5" matTooltip="editer ou supprimer">
           <mat-icon name="add" class="">edit</mat-icon>
         </button>
         <mat-card-title class="mat-headline-2 f-s-16 m-b-4">{{
           productcard.name
           }}</mat-card-title>
-        <div class="d-flex align-items-center justify-content-between">
-          some description here ?
-        </div>
+    
 
         <!-- <div class="d-flex align-items-center justify-content-center m-t-24">
           <div class="d-flex align-items-center">
